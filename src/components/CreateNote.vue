@@ -39,16 +39,16 @@ const handleNewNote = () => {
 .note-title {
   background-color: transparent;
   border: none;
-  border-bottom: 2px solid #A4BFB2; 
+  border-bottom: 1px solid #A4BFB2; 
   outline: none;
   font-size: 1.2rem;
   font-weight: bold;
-  width: 90%;
+  width: 70%;
   transition: border-color 0.3s ease;
 }
 
 .note-title:focus {
-  border-bottom: 2px solid seagreen; 
+  border-bottom: 1px solid seagreen; 
 }
 .create-note-btn {
   width: 30px;

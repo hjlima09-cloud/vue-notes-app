@@ -16,7 +16,7 @@ const handleDelete = () => {
         <button class="delete-btn" @click="() => {
   console.log('click borrar', note.id);
   handleDelete();
-}">🗑️</button>
+}">Delete</button>
     </article>
 </template>
 
@@ -31,18 +31,46 @@ const handleDelete = () => {
   justify-content: space-between;
   transition: all 0.3s;
 }
-.cart-title{
+
+.card-title {
   background-color: transparent;
+  width: 80%;
+  color: #2c3d38;
   border: none;
-  font-size: 1.3rem;
+  outline: none;
+  font-size: 1.1rem;
+  transition: border-color 0.3s ease;
 }
+
 [type="checkbox"]{
   transform: scale(2) translateX(-2);
 }
-.check{
-    width: 20px;
+
+.check {
+  appearance: none;
+  width: 20px;
   height: 20px;
+  border: 2px solid #ccc;
+  border-radius: 3px;
+  background-color: transparent;
+  position: relative;
+  cursor: pointer;
 }
+
+.check:checked {
+  background-color: #6E968A;
+  border-color: #6E968A;
+}
+
+.check:checked::after {
+  content: "✔";
+  color: white;
+  position: absolute;
+  top: 0;
+  left: 1px;
+  font-size: 14px;
+}
+
 .note-card:hover{
 border: 3px solid #E8D084;
 background-color: #E8D084;
@@ -58,6 +86,8 @@ background-color: #E8D084;
 .delete-btn {
   background-color: #e74c3c;
   color: white;
+  border-radius: 3px;
+  margin-left: 10px;
 }
 
 .delete-btn:hover {

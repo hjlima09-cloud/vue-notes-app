@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 import { ref } from "vue";
 
 export const useNoteStore = defineStore("notes", () => {
- // const API_URL =
+  const API_URL =
     "https://ca79540b3ebd85af0e97.free.beeceptor.com/api/amznotes/";
 
   const notes = ref([]);

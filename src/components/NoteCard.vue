@@ -1,26 +1,26 @@
 <script setup>
-defineProps({
+const props = defineProps({
   note: Object,
 });
+const emit = defineEmits(["delete"]);
 
-const emit = defineEmits(["toggle", "delete"]);
 const handleDelete = () => {
-  emit("delete", note.id);
+  emit("delete", props.note.id);
 };
 </script>
 
 <template>
-    <article class="note-card">
-        <input type="text" class="card-title" v-model="note.title">
-        <input type="checkbox" class="check" v-model="note.marked">
-        <button class="delete-btn" @click="() => {
-  console.log('click borrar', note.id);
-  handleDelete();
-}">Delete</button>
-    </article>
+  <article class="note-card">
+    <input type="text" class="card-title" v-model="props.note.title" />
+    <input type="checkbox" class="check" v-model="props.note.marked" />
+   <button class="delete-btn" @click="handleDelete">
+  <i class="fas fa-trash-alt"></i>
+</button>
+  </article>
 </template>
 
 <style>
+
 .note-card{
   background-color:#FAEEC3;
   width: 300px;

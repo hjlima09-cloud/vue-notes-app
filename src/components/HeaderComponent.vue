@@ -1,11 +1,11 @@
 <script setup>
-import logo from '../assets/logoAppNote.png'
+import logo from '../assets/logoApp.png'
 </script>
 
 <template>
   <header class="header">
       <router-link to="/" class="logo-link">
-      <img :src="logo" alt="Logo My Note App" class="logo" width="180px" />
+      <img :src="logo" alt="Logo My Note App" class="logo" width="80px" />
     </router-link>
     <h1>My note App</h1>
     <nav>

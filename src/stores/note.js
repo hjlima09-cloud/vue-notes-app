@@ -2,47 +2,86 @@ import { defineStore } from "pinia";
 import { ref } from "vue";
 
 export const useNoteStore = defineStore("notes", () => {
-  const API_URL =
-    "https://ca79540b3ebd85af0e97.free.beeceptor.com/api/amznotes/";
+const API_URL = "https://69079334b1879c890eda300c.mockapi.io/api/noteapp/notes";
+
 
   const notes = ref([]);
   const loading = ref(false);
   const error = ref(false);
 
+    // GET - Obtener todas las notas
   const getNotes = async () => {
     try {
       loading.value = true;
-
       const response = await fetch(API_URL);
       const data = await response.json();
-      notes.value = data. reverse();
-
-      loading.value = false;
+      notes.value = data.reverse(); // Opcional: para mostrar las nuevas arriba
       error.value = false;
     } catch (e) {
-      loading.value = false;
+      console.error("Error al obtener notas:", e);
       error.value = true;
+    } finally {
+      loading.value = false;
     }
   };
 
-  const createId = () => {
-    return Date.now().toString(36) + Math.random().toString(36).slice(2);
-  };
-
+  // POST - Añadir nueva nota
   const addNote = async (title) => {
     const newNote = {
-      id: createId(),
       title,
       marked: false,
     };
 
     try {
-      await fetch(API_URL, {
+      const res = await fetch(API_URL, {
         method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify(newNote),
       });
-      getNotes();
+
+      const createdNote = await res.json();
+      notes.value.unshift(createdNote); // Añade sin refrescar todo
     } catch (e) {
+      console.error("Error al añadir nota:", e);
+      error.value = true;
+    }
+  };
+
+  // DELETE - Eliminar nota
+  const deleteNote = async (id) => {
+    try {
+      await fetch(`${API_URL}/${id}`, {
+        method: "DELETE",
+      });
+
+      notes.value = notes.value.filter((note) => note.id !== id);
+    } catch (e) {
+      console.error("Error al borrar nota:", e);
+      error.value = true;
+    }
+  };
+
+  // PUT - Marcar o desmarcar como completada
+  const toggleMarked = async (id) => {
+    const note = notes.value.find((n) => n.id === id);
+    if (!note) return;
+
+    const updatedNote = { ...note, marked: !note.marked };
+
+    try {
+      await fetch(`${API_URL}/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedNote),
+      });
+
+      note.marked = !note.marked;
+    } catch (e) {
+      console.error("Error al actualizar nota:", e);
       error.value = true;
     }
   };
@@ -51,7 +90,9 @@ export const useNoteStore = defineStore("notes", () => {
     notes,
     loading,
     error,
-    addNote,
     getNotes,
+    addNote,
+    deleteNote,
+    toggleMarked,
   };
 });

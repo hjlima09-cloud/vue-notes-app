@@ -1,10 +1,16 @@
 <script setup>
+import { onMounted } from "vue";
 import HeaderComponent from "../components/HeaderComponent.vue";
 import IconCard from "../components/IconCard.vue";
 import NotePreview from "../components/NotePreview.vue";
 import { useNoteStore } from "../stores/note";
+import emptyNoteImg from "../assets/sectionNoteHome.png";
 
 const noteStore = useNoteStore();
+
+onMounted(() => {
+  noteStore.getNotes();
+});
 </script>
 
 <template>
@@ -45,9 +51,10 @@ const noteStore = useNoteStore();
   </section>
 
   <section class="latest-notes">
-    <h2>Últimas notas 📝</h2>
+    <h2>These are your most recent notes 📝</h2>
 
-    <div v-if="noteStore.notes.length > 0" class="note-preview-list">
+    <div v-if="noteStore.notes.length > 0" class="note-preview-list
+        ">
       <NotePreview
         v-for="note in noteStore.notes.slice(0, 4)"
         :key="note.id"
@@ -55,12 +62,19 @@ const noteStore = useNoteStore();
       />
     </div>
 
-    <div v-else class="no-notes">
-      <img src="../assets/sectionNoteHome.png" alt="No notes" class="empty-img" />
-      <p>Aún no has creado ninguna nota. <router-link to="/notes">Ve a notas</router-link> para hacerlo.</p>
+    <div v-else class="no-notes-container">
+      <div class="no-notes-inner">
+        <img :src="emptyNoteImg" alt="No notes" class="empty-img" />
+        <div class="no-notes-text">
+          <i class="fas fa-sticky-note fa-2x"></i>
+          <h3>You don't have any notes yet.</h3>
+          <p>
+            Go to <router-link to="/notes">Notes</router-link> to create your <own class=""></own>
+          </p>
+        </div>
+      </div>
     </div>
   </section>
-
 </template>
 
 <style scoped>
@@ -80,7 +94,6 @@ const noteStore = useNoteStore();
   transition: all 0.3s ease;
   cursor: pointer;
 }
-
 .notes-btn-link:hover {
   color: #2c3d38;
   background-color: white;
@@ -95,14 +108,12 @@ const noteStore = useNoteStore();
   padding: 4rem;
   z-index: 2;
 }
-
 .hero-title {
   color: white;
   font-size: 3rem;
   max-width: 600px;
   margin-bottom: 20px;
 }
-
 .benefits {
   display: flex;
   justify-content: center;
@@ -111,13 +122,11 @@ const noteStore = useNoteStore();
   background: #f0f8f6;
   padding: 4rem 2rem;
 }
-
 .latest-notes {
   background-color: #fff;
   padding: 4rem 2rem;
   text-align: center;
 }
-
 .note-preview-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -125,13 +134,38 @@ const noteStore = useNoteStore();
   margin-top: 2rem;
 }
 
-.no-notes {
-  margin-top: 2rem;
-  color: #555;
+/* NO HAY NOTAS */
+.no-notes-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
 }
-
+.no-notes-inner {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  max-width: 700px;
+  padding: 1rem;
+}
 .empty-img {
-  max-width: 200px;
-  margin-bottom: 1rem;
+  max-width: 380px;
+  border-radius: 12px;
+  width: 100%;
+  box-shadow: #555;
+}
+.no-notes-text {
+  text-align: left;
+}
+.no-notes-text i {
+  color: #2c3d38;
+  margin-bottom: 0.5rem;
+}
+.no-notes-text h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+.no-notes-text p {
+  font-size: 1rem;
+  color: #555;
 }
 </style>

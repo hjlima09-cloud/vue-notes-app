@@ -15,17 +15,17 @@ const API_URL = "https://69079334b1879c890eda300c.mockapi.io/api/noteapp/notes";
       loading.value = true;
       const response = await fetch(API_URL);
       const data = await response.json();
-      notes.value = data.reverse(); // Opcional: para mostrar las nuevas arriba
+      notes.value = data.reverse(); 
       error.value = false;
     } catch (e) {
-      console.error("Error al obtener notas:", e);
+      console.error("Error getting grades:", e);
       error.value = true;
     } finally {
       loading.value = false;
     }
   };
 
-  // POST - Añadir nueva nota
+  // POST -añadir nueva nota
   const addNote = async (title) => {
     const newNote = {
       title,
@@ -42,9 +42,9 @@ const API_URL = "https://69079334b1879c890eda300c.mockapi.io/api/noteapp/notes";
       });
 
       const createdNote = await res.json();
-      notes.value.unshift(createdNote); // Añade sin refrescar todo
+      notes.value.unshift(createdNote); 
     } catch (e) {
-      console.error("Error al añadir nota:", e);
+      console.error("Error deleting note:", e);
       error.value = true;
     }
   };
@@ -63,7 +63,7 @@ const API_URL = "https://69079334b1879c890eda300c.mockapi.io/api/noteapp/notes";
     }
   };
 
-  // PUT - Marcar o desmarcar como completada
+  // PUT - Marcar o desmarcar como completaa
   const toggleMarked = async (id) => {
     const note = notes.value.find((n) => n.id === id);
     if (!note) return;
@@ -81,7 +81,7 @@ const API_URL = "https://69079334b1879c890eda300c.mockapi.io/api/noteapp/notes";
 
       note.marked = !note.marked;
     } catch (e) {
-      console.error("Error al actualizar nota:", e);
+      console.error("Error updating note:", e);
       error.value = true;
     }
   };

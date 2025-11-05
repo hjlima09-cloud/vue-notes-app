@@ -12,7 +12,12 @@ const handleDelete = () => {
 <template>
   <article class="note-card">
     <input type="text" class="card-title" v-model="props.note.title" />
-    <input type="checkbox" class="check" v-model="props.note.marked" />
+    <input
+  type="checkbox"
+  class="check"
+  :checked="note.marked"
+  @change="() => emit('toggle', note.id)"
+/>
    <button class="delete-btn" @click="handleDelete">
   <i class="fas fa-trash-alt"></i>
 </button>

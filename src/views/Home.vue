@@ -30,31 +30,30 @@ onMounted(() => {
   <section class="benefits">
     <IconCard
       icon="fas fa-check-circle"
-      title="Rápido y Simple"
-      text="Crea y gestiona tus notas en segundos sin complicaciones."
+      title="Simple"
+      text="Create and manage your notes in seconds without complications."
     />
     <IconCard
       icon="fas fa-sync-alt"
-      title="Sincronización"
-      text="Accede a tus notas desde cualquier dispositivo conectado."
+      title="Synchronization"
+      text="Access your notes from any connected device."
     />
     <IconCard
       icon="fas fa-lock"
-      title="Privacidad"
-      text="Tus notas están seguras gracias a almacenamiento seguro."
+      title="Privacy"
+      text="Your notes are safe thanks to secure storage."
     />
     <IconCard
       icon="fas fa-bolt"
       title="Eficiencia"
-      text="Interfaz rápida y ligera para aumentar tu productividad."
+      text="Fast and lightweight interface to boost your productivity."
     />
   </section>
 
   <section class="latest-notes">
     <h2>These are your most recent notes 📝</h2>
 
-    <div v-if="noteStore.notes.length > 0" class="note-preview-list
-        ">
+    <div v-if="noteStore.notes.length > 0" class="note-preview-list">
       <NotePreview
         v-for="note in noteStore.notes.slice(0, 4)"
         :key="note.id"
@@ -69,7 +68,9 @@ onMounted(() => {
           <i class="fas fa-sticky-note fa-2x"></i>
           <h3>You don't have any notes yet.</h3>
           <p>
-            Go to <router-link to="/notes">Notes</router-link> to create your <own class=""></own>
+            Go to
+            <router-link to="/notes" class="link-btn">Notes</router-link> to
+            create your <own class=""></own>
           </p>
         </div>
       </div>
@@ -82,6 +83,9 @@ onMounted(() => {
   background: url("../assets/sliderHome.png") center center / cover no-repeat;
   height: 500px;
   z-index: 1;
+}
+.link-btn {
+  color: #2ebfc9;
 }
 .notes-btn-link {
   border: 2px solid white;
@@ -134,7 +138,6 @@ onMounted(() => {
   margin-top: 2rem;
 }
 
-/* NO HAY NOTAS */
 .no-notes-container {
   display: flex;
   justify-content: center;
@@ -151,7 +154,7 @@ onMounted(() => {
   max-width: 380px;
   border-radius: 12px;
   width: 100%;
-  box-shadow: #555;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
 }
 .no-notes-text {
   text-align: left;
@@ -161,7 +164,7 @@ onMounted(() => {
   margin-bottom: 0.5rem;
 }
 .no-notes-text h3 {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   margin-bottom: 0.5rem;
 }
 .no-notes-text p {

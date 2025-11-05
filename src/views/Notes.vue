@@ -27,6 +27,7 @@ onMounted(async () => {
         <NoteCard
           :note="note"
           @delete="noteStore.deleteNote"
+          @toggle="noteStore.toggleMarked"
         />
       </li>
 

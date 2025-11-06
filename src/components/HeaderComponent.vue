@@ -46,4 +46,7 @@ import logo from '../assets/logoApp.png'
   color:#6E968A;
 
 }
+.logo-link{
+  margin: 1%;
+}
 </style>

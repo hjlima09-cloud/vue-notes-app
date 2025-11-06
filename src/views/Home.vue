@@ -34,20 +34,16 @@ onMounted(() => {
       text="Create and manage your notes in seconds without complications."
     />
     <IconCard
-      icon="fas fa-sync-alt"
-      title="Synchronization"
-      text="Access your notes from any connected device."
+      icon="fa-sync-alt"
+      title="Sincronización"
+      text="Accede a tus notas desde cualquier dispositivo conectado."
     />
     <IconCard
       icon="fas fa-lock"
       title="Privacy"
       text="Your notes are safe thanks to secure storage."
     />
-    <IconCard
-      icon="fas fa-bolt"
-      title="Eficiencia"
-      text="Fast and lightweight interface to boost your productivity."
-    />
+
   </section>
 
   <section class="latest-notes">
@@ -121,10 +117,10 @@ onMounted(() => {
 .benefits {
   display: flex;
   justify-content: center;
-  gap: 3rem;
+  gap: 6rem;
   flex-wrap: wrap;
   background: #f0f8f6;
-  padding: 4rem 2rem;
+  padding: 2rem 1rem;
 }
 .latest-notes {
   background-color: #fff;

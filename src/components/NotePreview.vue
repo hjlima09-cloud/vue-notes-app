@@ -2,8 +2,8 @@
 defineProps({
   note: {
     type: Object,
-    required: true
-  }
+    required: true,
+  },
 });
 </script>
 
@@ -11,8 +11,10 @@ defineProps({
   <article :class="['note-preview', { completed: note.marked }]">
     <h3>{{ note.title }}</h3>
     <p>
-      <i :class="note.marked ? 'fas fa-check-circle' : 'far fa-clock'"></i>
-      {{ note.marked ? 'Completada' : 'Pendiente' }}
+      <font-awesome-icon
+        :icon="note.marked ? ['fas', 'check-circle'] : ['fas', 'clock']"
+      />
+      {{ note.marked ? "Completada" : "Pendiente" }}
     </p>
   </article>
 </template>
@@ -51,7 +53,8 @@ defineProps({
   font-weight: 600;
 }
 .note-preview {
-  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .note-preview:hover {

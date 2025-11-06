@@ -1,98 +1,126 @@
 <script setup>
-const props = defineProps({
+import { useNoteStore } from "../stores/note";
+
+const { note } = defineProps({
   note: Object,
 });
-const emit = defineEmits(["delete"]);
+
+const noteStore = useNoteStore();
 
 const handleDelete = () => {
-  emit("delete", props.note.id);
+  noteStore.deleteNote(note.id);
 };
 </script>
 
 <template>
-  <article class="note-card">
-    <input type="text" class="card-title" v-model="props.note.title" />
-    <input
-  type="checkbox"
-  class="check"
-  :checked="note.marked"
-  @change="() => emit('toggle', note.id)"
-/>
-   <button class="delete-btn" @click="handleDelete">
-  <i class="fas fa-trash-alt"></i>
-</button>
-  </article>
+  <div class="note-card" :class="{ completed: note.marked }">
+    <p>{{ note.title }}</p>
+    <div class="actions">
+      <label class="checkbox-wrapper">
+        <input
+          type="checkbox"
+          :checked="note.marked"
+          @change="() => noteStore.toggleMarked(note.id)"
+        />
+        <span class="checkmark"></span>
+      </label>
+
+      <button class="delete-btn" @click="handleDelete">
+        <font-awesome-icon icon="fa-solid fa-trash" />
+      </button>
+    </div>
+  </div>
 </template>
 
-<style>
-
-.note-card{
-  background-color:#FAEEC3;
-  width: 300px;
-  padding: 20px 30px;
-  border: 2px solid #ecdeb0;
-  border-radius: 6px;
+<style scoped>
+.note-card {
   display: flex;
   justify-content: space-between;
-  transition: all 0.3s;
+  align-items: center;
+  padding: 1rem 1.2rem;
+  border-radius: 10px;
+  background-color: #fffbe6;
+  border: 1px solid #d8d2b0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.card-title {
-  background-color: transparent;
-  width: 80%;
-  color: #2c3d38;
-  border: none;
-  outline: none;
-  font-size: 1.1rem;
-  transition: border-color 0.3s ease;
+.note-card.completed {
+  background-color: #f3fab6;
+  border-color: #b8f060;
 }
 
-[type="checkbox"]{
-  transform: scale(2) translateX(-2);
+.note-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
 }
 
-.check {
-  appearance: none;
-  width: 20px;
-  height: 20px;
-  border: 2px solid #ccc;
-  border-radius: 3px;
-  background-color: transparent;
+p {
+  font-weight: 500;
+  margin: 0;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.checkbox-wrapper {
   position: relative;
-  cursor: pointer;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
 }
 
-.check:checked {
-  background-color: #6E968A;
-  border-color: #6E968A;
+.checkbox-wrapper input {
+  opacity: 0;
+  width: 0;
+  height: 0;
 }
 
-.check:checked::after {
-  content: "✔";
-  color: white;
+.checkmark {
   position: absolute;
   top: 0;
-  left: 1px;
-  font-size: 14px;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: #eee;
+  border: 2px solid #aaa;
+  border-radius: 4px;
+  transition: all 0.3s ease;
 }
 
-.note-card:hover{
-border: 3px solid #E8D084;
-background-color: #E8D084;
+.checkbox-wrapper input:checked + .checkmark {
+  background-color: #2ebfc9;
+  border-color: #2ebfc9;
 }
-.note-card:has(input:checked){
-  border: 3px solid #E8D084;
-  background-color: #E8D084;
-  .cart-title{
-    font-weight: 100;
-  }
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.checkbox-wrapper input:checked + .checkmark:after {
+  display: block;
+  left: 7px;
+  top: 2px;
+  width: 6px;
+  height: 12px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
 }
 
 .delete-btn {
   background-color: #e74c3c;
   color: white;
-  border-radius: 3px;
-  margin-left: 10px;
+  border: none;
+  padding: 6px 8px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
 }
 
 .delete-btn:hover {

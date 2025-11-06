@@ -4,20 +4,20 @@
 <template>
   <footer class="footer">
     <div class="footer-left">
-      &copy; 2025 My Note App. Todos los derechos reservados.
+      &copy; 2025 My Note App. All rights reserved.
     </div>
     <div class="footer-right">
       <a href="#" target="_blank" class="social-icon">
-        <i class="fab fa-facebook-f"></i>
+        <font-awesome-icon icon="fa-brands fa-facebook-f" class="social-icon" />
       </a>
       <a href="#" target="_blank" class="social-icon">
-        <i class="fab fa-twitter"></i>
+        <font-awesome-icon icon="fa-brands fa-twitter" class="social-icon" />
       </a>
       <a href="#" target="_blank" class="social-icon">
-        <i class="fab fa-instagram"></i>
+        <font-awesome-icon icon="fa-brands fa-instagram" class="social-icon" />
       </a>
       <a href="#" target="_blank" class="social-icon">
-        <i class="fab fa-linkedin-in"></i>
+        <font-awesome-icon icon="fa-brands fa-linkedin-in" class="social-icon" />
       </a>
     </div>
   </footer>

@@ -42,7 +42,7 @@ const handleNewNote = () => {
   border-bottom: 1px solid #A4BFB2; 
   outline: none;
   font-size: 1.2rem;
-  font-weight: bold;
+  font-weight:400;
   width: 70%;
   transition: border-color 0.3s ease;
 }

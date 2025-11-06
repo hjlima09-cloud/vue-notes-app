@@ -54,7 +54,7 @@ const handleNewNote = () => {
   width: 30px;
   height: 30px;
   font-size: 1.5rem;
-  background-color: #CFAE2B;
+  background-color: #97A147;
   color: white;
   align-items: center;
   display: flex;
